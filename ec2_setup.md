@@ -6,6 +6,12 @@ This document describes the detailed setup process for creating an EC2 GPU insta
 
 We set up an AWS EC2 G5 instance with GPU support to run ComfyUI, enabling Claude Code to edit workflows, custom nodes, and Python code while seeing real-time feedback from the ComfyUI console.
 
+This guide includes cloning the [refgen repository](https://github.com/nikolayv/refgen) which contains:
+- Setup documentation (this file)
+- Usage instructions
+- Helper scripts (`start-comfyui.sh`)
+- Workflow files
+
 ## Setup Architecture
 
 - **Instance Type**: g5.xlarge (NVIDIA A10G GPU with 24GB VRAM)
@@ -96,8 +102,8 @@ EOF
 
 **Note**: If you stop and restart the instance, the public IP will change and you'll need to update the `HostName` in this config.
 
-### 7. ComfyUI Installation
-Connected to the instance and installed ComfyUI:
+### 7. Clone Setup Repository
+First, clone this repository which contains documentation and helper scripts:
 
 ```bash
 # SSH into the instance
@@ -107,6 +113,15 @@ ssh comfyui-ec2
 sudo apt-get update
 sudo apt-get install -y git python3-pip python3-venv
 
+# Clone the refgen repository (contains documentation and scripts)
+cd ~
+git clone https://github.com/nikolayv/refgen.git
+```
+
+### 8. ComfyUI Installation
+Install ComfyUI and its dependencies:
+
+```bash
 # Clone ComfyUI repository
 cd ~
 git clone https://github.com/comfyanonymous/ComfyUI.git
@@ -122,22 +137,32 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 
 # Install ComfyUI requirements
 pip install -r requirements.txt
+
+# Create directories for workflows and inputs
+mkdir -p ~/ComfyUI/workflows
 ```
 
-### 8. Helper Script Creation
-Created a convenience script to start ComfyUI:
+### 9. Helper Script Setup
+Copy the convenience script from the refgen repository:
 
 ```bash
-cat > ~/start-comfyui.sh << 'SCRIPT'
+# Copy the start script from refgen repo
+cp ~/refgen/start-comfyui.sh ~/start-comfyui.sh
+chmod +x ~/start-comfyui.sh
+
+# Verify it's executable
+ls -lh ~/start-comfyui.sh
+```
+
+The script contains:
+```bash
 #!/bin/bash
 cd ~/ComfyUI
 source venv/bin/activate
 python main.py --listen 0.0.0.0 --port 8188
-SCRIPT
-chmod +x ~/start-comfyui.sh
 ```
 
-### 9. GPU Verification
+### 10. GPU Verification
 Verified GPU access and PyTorch CUDA support:
 ```bash
 # Check NVIDIA GPU
@@ -155,7 +180,7 @@ CUDA available: True
 GPU: NVIDIA A10G
 ```
 
-### 10. Claude Code CLI Installation (Optional)
+### 11. Claude Code CLI Installation (Optional)
 Installed Claude Code CLI directly on the EC2 instance for terminal-based usage:
 
 ```bash
