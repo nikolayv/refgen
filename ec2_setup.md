@@ -137,12 +137,34 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 
 # Install ComfyUI requirements
 pip install -r requirements.txt
-
-# Create directories for workflows and inputs
-mkdir -p ~/ComfyUI/workflows
 ```
 
-### 9. Helper Script Setup
+### 9. Link ComfyUI to refgen Repository
+Create symlinks so ComfyUI uses the version-controlled workflows and inputs from the refgen repository:
+
+```bash
+# Remove default directories
+rm -rf ~/ComfyUI/workflows
+rm -rf ~/ComfyUI/input
+
+# Create symlinks to refgen
+ln -s ~/refgen/workflows ~/ComfyUI/workflows
+ln -s ~/refgen/input ~/ComfyUI/input
+
+# Verify symlinks
+ls -la ~/ComfyUI/ | grep -E "workflows|input"
+# Should show:
+#   workflows -> /home/ubuntu/refgen/workflows
+#   input -> /home/ubuntu/refgen/input
+```
+
+This setup ensures:
+- Workflows are version controlled in the refgen repository
+- Input images are tracked alongside workflows
+- Changes in refgen are immediately visible in ComfyUI
+- You only need to commit/push from the refgen directory
+
+### 10. Helper Script Setup
 Copy the convenience script from the refgen repository:
 
 ```bash
@@ -162,7 +184,23 @@ source venv/bin/activate
 python main.py --listen 0.0.0.0 --port 8188
 ```
 
-### 10. GPU Verification
+### 11. Download Models
+Download required models for the workflows:
+
+```bash
+# Run the automated download script from refgen
+cd ~/refgen/models
+./download_models.sh
+```
+
+This will download (~8.5GB total):
+- SDXL Base 1.0 (6.5GB)
+- ControlNet MLSD (1.4GB)
+- IP-Adapter SDXL (670MB)
+
+Models are downloaded to the ComfyUI models directory and persist across instance restarts (but not termination).
+
+### 12. GPU Verification
 Verified GPU access and PyTorch CUDA support:
 ```bash
 # Check NVIDIA GPU
@@ -180,7 +218,7 @@ CUDA available: True
 GPU: NVIDIA A10G
 ```
 
-### 11. Claude Code CLI Installation (Optional)
+### 13. Claude Code CLI Installation (Optional)
 Installed Claude Code CLI directly on the EC2 instance for terminal-based usage:
 
 ```bash
