@@ -1,0 +1,36 @@
+# Large model files (too large for git)
+models/*.safetensors
+models/*.pth
+models/*.ckpt
+models/*.bin
+models/*.pt
+
+# Keep model management scripts and documentation
+!models/download_models.sh
+!models/models_manifest.txt
+!models/README.md
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log

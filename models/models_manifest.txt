@@ -1,0 +1,54 @@
+# ComfyUI Models Manifest
+# This file documents all required models for workflows in this repository
+
+## Checkpoints (Stable Diffusion Models)
+
+### SDXL Base 1.0
+- File: sd_xl_base_1.0.safetensors
+- Size: 6.5 GB
+- Location: ComfyUI/models/checkpoints/
+- Source: https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0
+- Direct URL: https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors
+- Used by: Combine Styles Workflow.json
+
+## ControlNet Models
+
+### ControlNet v1.1 MLSD
+- File: control_v11p_sd15_mlsd.pth
+- Size: 1.4 GB
+- Location: ComfyUI/models/controlnet/
+- Source: https://huggingface.co/lllyasviel/ControlNet-v1-1
+- Direct URL: https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11p_sd15_mlsd.pth
+- Purpose: Line detection for pose/structure control
+- Used by: Combine Styles Workflow.json
+
+## IP-Adapter Models
+
+### IP-Adapter SDXL
+- File: ip-adapter_sdxl.safetensors
+- Size: 670 MB
+- Location: ComfyUI/models/ipadapter/
+- Source: https://huggingface.co/h94/IP-Adapter
+- Direct URL: https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter_sdxl.safetensors
+- Purpose: Image prompt adapter for style transfer
+- Used by: Combine Styles Workflow.json
+
+## Download Instructions
+
+### Option 1: Use the download script
+```bash
+cd /home/ubuntu/refgen/models
+./download_models.sh
+```
+
+### Option 2: Manual download
+Download each model from the Direct URLs listed above and place them in their respective locations.
+
+## Total Storage Required
+Approximately 8.5 GB for all models listed above.
+
+## Notes
+- Models are stored in the ComfyUI installation directory, not in this git repository
+- The .gitignore excludes model files from version control
+- This manifest serves as documentation for required models
+- Models are downloaded to the EC2 instance and persist across restarts (not stops)
