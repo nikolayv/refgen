@@ -165,15 +165,15 @@ This setup ensures:
 - You only need to commit/push from the refgen directory
 
 ### 10. Helper Script Setup
-Copy the convenience script from the refgen repository:
+Create a symlink to the start script from the refgen repository:
 
 ```bash
-# Copy the start script from refgen repo
-cp ~/refgen/start-comfyui.sh ~/start-comfyui.sh
-chmod +x ~/start-comfyui.sh
+# Create symlink to start script (already in refgen repo)
+ln -s ~/refgen/start-comfyui.sh ~/start-comfyui.sh
 
-# Verify it's executable
+# Verify the symlink
 ls -lh ~/start-comfyui.sh
+# Should show: ~/start-comfyui.sh -> /home/ubuntu/refgen/start-comfyui.sh
 ```
 
 The script contains:
