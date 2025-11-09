@@ -1,6 +1,6 @@
 {
   "last_node_id": 14,
-  "last_link_id": 25,
+  "last_link_id": 26,
   "nodes": [
     {
       "id": 7,
@@ -144,7 +144,7 @@
           "name": "MODEL",
           "type": "MODEL",
           "links": [
-            16
+            26
           ],
           "slot_index": 0
         },
@@ -500,7 +500,7 @@
     },
     {
       "id": 14,
-      "type": "IPAdapterModelLoader",
+      "type": "IPAdapterUnifiedLoader",
       "pos": [
         -100,
         -50
@@ -510,24 +510,38 @@
         98
       ],
       "flags": {},
-      "order": 5,
+      "order": 6,
       "mode": 0,
-      "inputs": [],
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 26
+        }
+      ],
       "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            16
+          ],
+          "slot_index": 0
+        },
         {
           "name": "IPADAPTER",
           "type": "IPADAPTER",
           "links": [
             25
           ],
-          "slot_index": 0
+          "slot_index": 1
         }
       ],
       "properties": {
-        "Node name for S&R": "IPAdapterModelLoader"
+        "Node name for S&R": "IPAdapterUnifiedLoader"
       },
       "widgets_values": [
-        "ip-adapter_sdxl.safetensors"
+        "PLUS (high strength)"
       ]
     }
   ],
@@ -606,7 +620,7 @@
     ],
     [
       16,
-      10,
+      14,
       0,
       4,
       0,
@@ -647,10 +661,18 @@
     [
       25,
       14,
-      0,
+      1,
       4,
       1,
       "IPADAPTER"
+    ],
+    [
+      26,
+      10,
+      0,
+      14,
+      0,
+      "MODEL"
     ]
   ],
   "groups": [],
