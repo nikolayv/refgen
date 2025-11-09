@@ -353,7 +353,7 @@
         "Node name for S&R": "ControlNetLoader"
       },
       "widgets_values": [
-        "control_v11p_sd15_mlsd.pth"
+        "controlnet-union-sdxl-1.0.safetensors"
       ]
     },
     {
@@ -541,7 +541,7 @@
         "Node name for S&R": "IPAdapterUnifiedLoader"
       },
       "widgets_values": [
-        "PLUS (high strength)"
+        "VIT-G (medium strength)"
       ]
     }
   ],
