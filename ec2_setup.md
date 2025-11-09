@@ -193,10 +193,11 @@ cd ~/refgen/models
 ./download_models.sh
 ```
 
-This will download (~8.5GB total):
+This will download (~13.1GB total):
 - SDXL Base 1.0 (6.5GB)
-- ControlNet MLSD (1.4GB)
+- ControlNet Union SDXL (2.5GB) - supports 12+ control types
 - IP-Adapter SDXL (670MB)
+- CLIP Vision bigG (3.5GB) - required by IP-Adapter
 
 Models are downloaded to the ComfyUI models directory and persist across instance restarts (but not termination).
 
