@@ -13,14 +13,15 @@
 
 ## ControlNet Models
 
-### ControlNet v1.1 MLSD
-- File: control_v11p_sd15_mlsd.pth
-- Size: 1.4 GB
+### ControlNet Union SDXL 1.0
+- File: controlnet-union-sdxl-1.0.safetensors
+- Size: 2.5 GB
 - Location: ComfyUI/models/controlnet/
-- Source: https://huggingface.co/lllyasviel/ControlNet-v1-1
-- Direct URL: https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11p_sd15_mlsd.pth
-- Purpose: Line detection for pose/structure control
-- Used by: Combine Styles Workflow.json
+- Source: https://huggingface.co/xinsir/controlnet-union-sdxl-1.0
+- Direct URL: https://huggingface.co/xinsir/controlnet-union-sdxl-1.0/resolve/main/diffusion_pytorch_model.safetensors
+- Purpose: Unified ControlNet supporting 12+ control types (MLSD, Canny, Depth, Openpose, etc.)
+- Used by: workflow.json
+- Note: Replaces SD1.5 ControlNet models for SDXL compatibility
 
 ## IP-Adapter Models
 
@@ -30,8 +31,21 @@
 - Location: ComfyUI/models/ipadapter/
 - Source: https://huggingface.co/h94/IP-Adapter
 - Direct URL: https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter_sdxl.safetensors
-- Purpose: Image prompt adapter for style transfer
-- Used by: Combine Styles Workflow.json
+- Purpose: Image prompt adapter for style transfer (VIT-G variant)
+- Used by: workflow.json
+- Note: Requires CLIP Vision model below
+
+## CLIP Vision Models
+
+### CLIP ViT-bigG-14
+- File: CLIP-ViT-bigG-14-laion2B-39B-b160k.safetensors
+- Size: 3.5 GB
+- Location: ComfyUI/models/clip_vision/
+- Source: https://huggingface.co/h94/IP-Adapter
+- Direct URL: https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/image_encoder/model.safetensors
+- Purpose: Image encoder required by IP-Adapter SDXL
+- Used by: workflow.json (via IPAdapterUnifiedLoader)
+- Note: Must be renamed after download to CLIP-ViT-bigG-14-laion2B-39B-b160k.safetensors
 
 ## Download Instructions
 
@@ -45,7 +59,11 @@ cd /home/ubuntu/refgen/models
 Download each model from the Direct URLs listed above and place them in their respective locations.
 
 ## Total Storage Required
-Approximately 8.5 GB for all models listed above.
+Approximately 13.1 GB for all models listed above:
+- SDXL Base: 6.5 GB
+- ControlNet Union SDXL: 2.5 GB
+- IP-Adapter SDXL: 0.7 GB
+- CLIP Vision bigG: 3.5 GB
 
 ## Notes
 - Models are stored in the ComfyUI installation directory, not in this git repository

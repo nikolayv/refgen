@@ -8,11 +8,13 @@ COMFYUI_DIR="/home/ubuntu/ComfyUI"
 CHECKPOINTS_DIR="$COMFYUI_DIR/models/checkpoints"
 CONTROLNET_DIR="$COMFYUI_DIR/models/controlnet"
 IPADAPTER_DIR="$COMFYUI_DIR/models/ipadapter"
+CLIPVISION_DIR="$COMFYUI_DIR/models/clip_vision"
 
 # Create directories if they don't exist
 mkdir -p "$CHECKPOINTS_DIR"
 mkdir -p "$CONTROLNET_DIR"
 mkdir -p "$IPADAPTER_DIR"
+mkdir -p "$CLIPVISION_DIR"
 
 echo "Downloading models to ComfyUI installation..."
 
@@ -25,13 +27,13 @@ else
     echo "✓ SDXL Base 1.0 already exists"
 fi
 
-# Download ControlNet MLSD
-if [ ! -f "$CONTROLNET_DIR/control_v11p_sd15_mlsd.pth" ]; then
-    echo "Downloading ControlNet MLSD (1.4GB)..."
-    wget -O "$CONTROLNET_DIR/control_v11p_sd15_mlsd.pth" \
-        "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11p_sd15_mlsd.pth"
+# Download ControlNet Union SDXL
+if [ ! -f "$CONTROLNET_DIR/controlnet-union-sdxl-1.0.safetensors" ]; then
+    echo "Downloading ControlNet Union SDXL (2.5GB)..."
+    wget -O "$CONTROLNET_DIR/controlnet-union-sdxl-1.0.safetensors" \
+        "https://huggingface.co/xinsir/controlnet-union-sdxl-1.0/resolve/main/diffusion_pytorch_model.safetensors"
 else
-    echo "✓ ControlNet MLSD already exists"
+    echo "✓ ControlNet Union SDXL already exists"
 fi
 
 # Download IP-Adapter SDXL
@@ -43,10 +45,20 @@ else
     echo "✓ IP-Adapter SDXL already exists"
 fi
 
+# Download CLIP Vision Model
+if [ ! -f "$CLIPVISION_DIR/CLIP-ViT-bigG-14-laion2B-39B-b160k.safetensors" ]; then
+    echo "Downloading CLIP Vision bigG (3.5GB)..."
+    wget -O "$CLIPVISION_DIR/CLIP-ViT-bigG-14-laion2B-39B-b160k.safetensors" \
+        "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/image_encoder/model.safetensors"
+else
+    echo "✓ CLIP Vision bigG already exists"
+fi
+
 echo ""
 echo "All models downloaded successfully!"
 echo ""
 echo "Model locations:"
-echo "  Checkpoints: $CHECKPOINTS_DIR"
-echo "  ControlNet:  $CONTROLNET_DIR"
-echo "  IP-Adapter:  $IPADAPTER_DIR"
+echo "  Checkpoints:  $CHECKPOINTS_DIR"
+echo "  ControlNet:   $CONTROLNET_DIR"
+echo "  IP-Adapter:   $IPADAPTER_DIR"
+echo "  CLIP Vision:  $CLIPVISION_DIR"
