@@ -45,13 +45,31 @@ else
     echo "✓ IP-Adapter SDXL already exists"
 fi
 
-# Download CLIP Vision Model
+# Download CLIP Vision Model (bigG for VIT-G preset)
 if [ ! -f "$CLIPVISION_DIR/CLIP-ViT-bigG-14-laion2B-39B-b160k.safetensors" ]; then
     echo "Downloading CLIP Vision bigG (3.5GB)..."
     wget -O "$CLIPVISION_DIR/CLIP-ViT-bigG-14-laion2B-39B-b160k.safetensors" \
         "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/image_encoder/model.safetensors"
 else
     echo "✓ CLIP Vision bigG already exists"
+fi
+
+# Download IP-Adapter PLUS SDXL (for high strength style transfer)
+if [ ! -f "$IPADAPTER_DIR/ip-adapter-plus_sdxl_vit-h.safetensors" ]; then
+    echo "Downloading IP-Adapter PLUS SDXL (820MB)..."
+    wget -O "$IPADAPTER_DIR/ip-adapter-plus_sdxl_vit-h.safetensors" \
+        "https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus_sdxl_vit-h.safetensors"
+else
+    echo "✓ IP-Adapter PLUS SDXL already exists"
+fi
+
+# Download CLIP Vision Model H-14 (for PLUS preset)
+if [ ! -f "$CLIPVISION_DIR/CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors" ]; then
+    echo "Downloading CLIP Vision H-14 (2.5GB)..."
+    wget -O "$CLIPVISION_DIR/CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors" \
+        "https://huggingface.co/h94/IP-Adapter/resolve/main/models/image_encoder/model.safetensors"
+else
+    echo "✓ CLIP Vision H-14 already exists"
 fi
 
 echo ""

@@ -48,9 +48,9 @@
         "Node name for S&R": "KSampler"
       },
       "widgets_values": [
-        123213,
+        999999,
         "fixed",
-        40,
+        240,
         6.5,
         "dpmpp_2m_sde",
         "simple",
@@ -283,7 +283,7 @@
         "Node name for S&R": "CLIPTextEncode"
       },
       "widgets_values": [
-        "The figure running towards the camera in the style of the colorful blob pattern."
+        "The figure running towards the camera composed of a cloud of the grayscale balls."
       ]
     },
     {
@@ -400,7 +400,7 @@
         "Node name for S&R": "ControlNetApply"
       },
       "widgets_values": [
-        1
+        0.8
       ]
     },
     {
@@ -492,10 +492,10 @@
         "Node name for S&R": "IPAdapter"
       },
       "widgets_values": [
-        1,
+        3.0,
         0,
         1,
-        "prompt is more important"
+        "standard"
       ]
     },
     {
@@ -541,7 +541,7 @@
         "Node name for S&R": "IPAdapterUnifiedLoader"
       },
       "widgets_values": [
-        "VIT-G (medium strength)"
+        "PLUS (high strength)"
       ]
     }
   ],
